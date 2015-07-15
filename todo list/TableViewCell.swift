@@ -9,10 +9,22 @@
 import UIKit
 import QuartzCore
 
+// a protocol that the TableVIewCell uses to inform its delegate of state change
+protocol TableViewCellDelegate {
+    // indicates that the item has been deleted
+    func toDoItemDeleted(toDoItem: ToDoItem)
+}
+
 class TableViewCell: UITableViewCell {
     let gradientLayer = CAGradientLayer()
     var originalCenter = CGPoint()
     var deleteOnDragRelease = false
+    
+    // the cell's delegate
+    var delegate: TableViewCellDelegate?
+    
+    // the item that the cell render
+    var toDoItem: ToDoItem?
     
     required init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -61,6 +73,12 @@ class TableViewCell: UITableViewCell {
             if !deleteOnDragRelease {
                 // if we're nto deleting, animate the cell back into place
                 UIView.animateWithDuration(0.2, animations: {self.frame = originalFrame})
+            }
+            if deleteOnDragRelease {
+                if delegate != nil && toDoItem != nil {
+                    // notify the delegate that this should be deleted!
+                    delegate!.toDoItemDeleted(toDoItem!)
+                }
             }
             
         }

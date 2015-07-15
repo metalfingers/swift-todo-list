@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TableViewCellDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -62,9 +62,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel?.backgroundColor = UIColor.clearColor()
         cell.textLabel?.text = item.text
         
+        cell.delegate = self
+        cell.toDoItem = item
+        
         return cell
     }
+
+    func toDoItemDeleted(toDoItem: ToDoItem) {
+        let index = (toDoItems as NSArray).indexOfObject(toDoItem)
+        if index == NSNotFound { return }
+        
+        toDoItems.removeAtIndex(index)
+        
+        // animate removal of the row
+        tableView.beginUpdates()
+        let indexPathForRow = NSIndexPath(forRow: index, inSection: 0)
+        tableView.deleteRowsAtIndexPaths([indexPathForRow], withRowAnimation: .Fade)
+        tableView.endUpdates()
+    }
     
+    
+    // MARK: - Table view delegate
     func colorForIndex(index: Int) -> UIColor {
         let itemCount = toDoItems.count - 1
         let val = (CGFloat(index) / CGFloat(itemCount)) * 0.6
