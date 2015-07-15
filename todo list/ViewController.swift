@@ -21,6 +21,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+        tableView.separatorStyle = .None
+        tableView.rowHeight = 50.0
+        
+        
         if toDoItems.count > 0 {
             return
         }
@@ -56,6 +60,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel?.text = item.text
         
         return cell
+    }
+    
+    func colorForIndex(index: Int) -> UIColor {
+        let itemCount = toDoItems.count - 1
+        let val = (CGFloat(index) / CGFloat(itemCount)) * 0.6
+        return UIColor(red: 1.0, green: val, blue: 0, alpha: 1.0)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+            cell.backgroundColor = colorForIndex(indexPath.row)
     }
     
     
