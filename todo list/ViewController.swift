@@ -8,18 +8,46 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    var toDoItems = [ToDoItem]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        if toDoItems.count > 0 {
+            return
+        }
+        
+        toDoItems.append(ToDoItem(text: "shoot the dog"))
+        toDoItems.append(ToDoItem(text: "buy eggs"))
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toDoItems.count
     }
 
-
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell",
+            forIndexPath: indexPath) as! UITableViewCell
+        let item = toDoItems[indexPath.row]
+        
+        cell.textLabel?.text = item.text
+        
+        return cell
+    }
+    
+    
 }
 

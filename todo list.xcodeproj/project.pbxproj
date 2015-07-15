@@ -13,6 +13,7 @@
 		3BD6257A1B55E17600EAB132 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BD625791B55E17600EAB132 /* Images.xcassets */; };
 		3BD6257D1B55E17600EAB132 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BD6257B1B55E17600EAB132 /* LaunchScreen.xib */; };
 		3BD625891B55E17600EAB132 /* todo_listTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD625881B55E17600EAB132 /* todo_listTests.swift */; };
+		3BD625931B55E6BF00EAB132 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD625921B55E6BF00EAB132 /* ToDoItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		3BD625821B55E17600EAB132 /* todo listTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "todo listTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD625871B55E17600EAB132 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BD625881B55E17600EAB132 /* todo_listTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todo_listTests.swift; sourceTree = "<group>"; };
+		3BD625921B55E6BF00EAB132 /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				3BD625721B55E17600EAB132 /* AppDelegate.swift */,
 				3BD625741B55E17600EAB132 /* ViewController.swift */,
+				3BD625921B55E6BF00EAB132 /* ToDoItem.swift */,
 				3BD625761B55E17600EAB132 /* Main.storyboard */,
 				3BD625791B55E17600EAB132 /* Images.xcassets */,
 				3BD6257B1B55E17600EAB132 /* LaunchScreen.xib */,
@@ -214,6 +217,7 @@
 			files = (
 				3BD625751B55E17600EAB132 /* ViewController.swift in Sources */,
 				3BD625731B55E17600EAB132 /* AppDelegate.swift in Sources */,
+				3BD625931B55E6BF00EAB132 /* ToDoItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
