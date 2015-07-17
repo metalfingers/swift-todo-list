@@ -15,6 +15,7 @@
 		3BD625891B55E17600EAB132 /* todo_listTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD625881B55E17600EAB132 /* todo_listTests.swift */; };
 		3BD625931B55E6BF00EAB132 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD625921B55E6BF00EAB132 /* ToDoItem.swift */; };
 		3BD625951B55F29000EAB132 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD625941B55F29000EAB132 /* TableViewCell.swift */; };
+		3BD625971B589BD300EAB132 /* StrikeThroughText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD625961B589BD300EAB132 /* StrikeThroughText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		3BD625881B55E17600EAB132 /* todo_listTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todo_listTests.swift; sourceTree = "<group>"; };
 		3BD625921B55E6BF00EAB132 /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		3BD625941B55F29000EAB132 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		3BD625961B589BD300EAB132 /* StrikeThroughText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrikeThroughText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				3BD625741B55E17600EAB132 /* ViewController.swift */,
 				3BD625921B55E6BF00EAB132 /* ToDoItem.swift */,
 				3BD625941B55F29000EAB132 /* TableViewCell.swift */,
+				3BD625961B589BD300EAB132 /* StrikeThroughText.swift */,
 				3BD625761B55E17600EAB132 /* Main.storyboard */,
 				3BD625791B55E17600EAB132 /* Images.xcassets */,
 				3BD6257B1B55E17600EAB132 /* LaunchScreen.xib */,
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BD625971B589BD300EAB132 /* StrikeThroughText.swift in Sources */,
 				3BD625751B55E17600EAB132 /* ViewController.swift in Sources */,
 				3BD625951B55F29000EAB132 /* TableViewCell.swift in Sources */,
 				3BD625731B55E17600EAB132 /* AppDelegate.swift in Sources */,

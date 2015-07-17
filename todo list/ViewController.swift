@@ -59,8 +59,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let item = toDoItems[indexPath.row]
         
         cell.selectionStyle = .None
-        cell.textLabel?.backgroundColor = UIColor.clearColor()
-        cell.textLabel?.text = item.text
+//        cell.textLabel?.backgroundColor = UIColor.clearColor()
+//        cell.textLabel?.text = item.text
         
         cell.delegate = self
         cell.toDoItem = item

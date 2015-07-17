@@ -19,6 +19,10 @@ class TableViewCell: UITableViewCell {
     let gradientLayer = CAGradientLayer()
     var originalCenter = CGPoint()
     var deleteOnDragRelease = false
+    var completeOnDragRelease = false
+    
+    let label: StrikeThroughText
+    var itemCompleteLayer = CALayer()
     
     // the cell's delegate
     var delegate: TableViewCellDelegate?
@@ -31,7 +35,15 @@ class TableViewCell: UITableViewCell {
     }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        label = StrikeThroughText(frame: CGRect.nullRect)
+        label.textColor = UIColor.whiteColor()
+        label.font = UIFont.boldSystemFontOfSize(16)
+        label.backgroundColor = UIColor.clearColor()
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        addSubview(label)
+        selectionStyle = .None
         
         // gradient layer for cell
         gradientLayer.frame = bounds
@@ -43,15 +55,34 @@ class TableViewCell: UITableViewCell {
         gradientLayer.locations = [0.0, 0.01, 0.95, 1.0]
         layer.insertSublayer(gradientLayer, atIndex: 0)
         
+        // add a layer that renders a green background when an item is complete
+        itemCompleteLayer = CALayer(layer: layer)
+        itemCompleteLayer.backgroundColor = UIColor(red: 0.0, green: 0.6, blue: 0.0, alpha: 1.0).CGColor
+        itemCompleteLayer.hidden = true
+        layer.insertSublayer(itemCompleteLayer, atIndex: 0)
+        
+        
         // add a pan recognizer
         var recognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
         recognizer.delegate = self
         addGestureRecognizer(recognizer)
     }
     
+    
+    let kLabelLeftMargin: CGFloat = 15.0
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
+        itemCompleteLayer.frame = bounds
+        label.frame = CGRect(x: kLabelLeftMargin, y: 0, width: bounds.size.width - kLabelLeftMargin, height: bounds.size.height)
+        
+        var toDoItem: ToDoItem? {
+            didSet {
+                label.text = toDoItem!.text
+                label.strikeThrough = toDoItem!.completed
+                itemCompleteLayer.hidden = !label.strikeThrough
+            }
+        }
     }
     
     func handlePan(recognizer: UIPanGestureRecognizer) {
@@ -65,13 +96,15 @@ class TableViewCell: UITableViewCell {
             center = CGPointMake(originalCenter.x + translation.x, originalCenter.y)
             // has the user dragged far enough to initiate a delete or complete?
             deleteOnDragRelease = frame.origin.x < -frame.size.width / 2.0
+            completeOnDragRelease = frame.origin.x > frame.size.width / 2.0
+            
         }
         
         if recognizer.state == .Ended {
             // the frame the cell had before the user dragged it
             let originalFrame = CGRect(x: 0, y: frame.origin.y, width: bounds.size.width, height: bounds.size.height)
-            if !deleteOnDragRelease {
-                // if we're nto deleting, animate the cell back into place
+            if !deleteOnDragRelease || !completeOnDragRelease {
+                // if we're not deleting or completing, animate the cell back into place
                 UIView.animateWithDuration(0.2, animations: {self.frame = originalFrame})
             }
             if deleteOnDragRelease {
@@ -79,6 +112,13 @@ class TableViewCell: UITableViewCell {
                     // notify the delegate that this should be deleted!
                     delegate!.toDoItemDeleted(toDoItem!)
                 }
+            } else if completeOnDragRelease {
+                if toDoItem != nil {
+                   toDoItem!.completed = true
+                }
+                label.strikeThrough = true
+                itemCompleteLayer.hidden = false
+                
             }
             
         }
